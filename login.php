@@ -12,18 +12,51 @@
 
 <div class="jumbotron text-center">
   <h1>Mortgage Central</h1>
-  <p>This page is non-operational rn</p>
+  <p>Only Signing Up works rn</p>
 </div>
+
+<?php
+	if (isset($_POST['login'])){
+		echo "<div class='alert alert-success'><strong>Success!</strong> The Log In button works</div>";
+	} else if(isset($_POST['signup'])){
+		echo "<div class='alert alert-success'><strong>Success!</strong> The Sign Up button works</div>";
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "mortusers";
+		$email = $_POST['email'];
+		$pwd = $_POST['pwd'];
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		$sql = "INSERT INTO users (UserEmail, UserPassword)
+		VALUES ('" . $email . "', '" . $pwd . "');";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "<div class='alert alert-success'><strong>Success!</strong> New account created</div>";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+
+		$conn->close();
+	} else {
+		echo "<div class='alert alert-warning'><strong>No button pressed!</strong></div>";
+	}
+?>
 
 <div class="container">
     <form action="login.php" method="post">
 		<div class="form-group">
 			<label for="email">Email address:</label>
-			<input type="email" class="form-control" id="email">
+			<input type="email" class="form-control" name="email">
 		</div>
 		<div class="form-group">
 			<label for="pwd">Password:</label>
-			<input type="password" class="form-control" id="pwd">
+			<input type="password" class="form-control" name="pwd">
 		</div>
 		<div class="btn-group">
 			<button type="submit" name="login" class="btn btn-primary">Log In</button>
