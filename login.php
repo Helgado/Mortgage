@@ -19,7 +19,6 @@
 	if (isset($_POST['login'])){
 		echo "<div class='alert alert-success'><strong>Success!</strong> The Log In button works</div>";
 	} else if(isset($_POST['signup'])){
-		echo "<div class='alert alert-success'><strong>Success!</strong> The Sign Up button works</div>";
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
@@ -44,7 +43,7 @@
 
 		$conn->close();
 	} else {
-		echo "<div class='alert alert-warning'><strong>No button pressed!</strong></div>";
+		echo "<div class='alert alert-warning'><strong>No button pressed! How did you get here?</strong></div>";
 	}
 ?>
 
